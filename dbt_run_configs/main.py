@@ -1,6 +1,8 @@
+from dbt_run_configs import configs
+
 
 def print_hi(name):
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    print(configs.parse_configs())
 
 
 if __name__ == '__main__':

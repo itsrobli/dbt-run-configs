@@ -6,7 +6,7 @@ name: dbt_run_config
 run_configs:
   # Name of config is passed into the run script
   # Each config should relate to one dbt profile target
-  ad_hoc_run:
+  - name: ad_hoc_run
     # dbt profile target name in your ~\.dbt\profiles.yml
     # This profile determines the database
     target: dev
@@ -36,7 +36,7 @@ run_configs:
       only:
         - reference_mapping1
   # Example of config to only run dbt test
-  ad_hoc_test_only:
+  - name: ad_hoc_test_only
     target: dev
     models: null
     test_models:
@@ -44,7 +44,7 @@ run_configs:
     seed:
       all: true
   # Example of config for CI env
-  ci:
+  - name: ci
     target: ci  # ensure dbt profile sets database as AMPCRE_NONPROD_COPY_TABLEAU
     models:
       - model1+
@@ -54,7 +54,7 @@ run_configs:
     seed:
       all: true
   # Example of cofig to only run the views and nothing else
-  refresh_views:
+  - name: refresh_views
     target: dev
     models:
       - "config.materialized:view"
