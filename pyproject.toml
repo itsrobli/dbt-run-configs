@@ -12,6 +12,7 @@ pydantic = "^1.9.1"
 
 [tool.poetry.dev-dependencies]
 datamodel-code-generator = "^0.13.0"
+pytest = "^7.1.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

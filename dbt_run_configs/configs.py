@@ -27,9 +27,10 @@ class Configs(BaseModel):
     run_configs: List[RunConfig]
 
 
-def parse_configs() -> Configs:
+def parse_configs(config_file_path_user: str = None) -> Configs:
     config_file_path_template = os.path.join('dbt_run_configs', 'dbt_run_config_template.yml')
-    config_file_path_user = os.path.join('user_space', 'dbt_run_config_user.yml')
+    if config_file_path_user is None:
+        config_file_path_user = os.path.join('user_space', 'dbt_run_config_user.yml')
     if not os.path.exists(config_file_path_user):
         print(f'First time setup.\n'
               f'Creating {config_file_path_user}')

@@ -1,0 +1,61 @@
+version: 3.0.0
+name: dbt_run_config
+
+# Unique run configs in the format shown below
+# The run script will be sensible if seed or models or test_models is set
+run_configs:
+  # Name of config is passed into the run script
+  # Each config should relate to one dbt profile target
+  - name: ad_hoc_run
+    # dbt profile target name in your ~\.dbt\profiles.yml
+    # This profile determines the database
+    target: dev
+    # List of dbt models to run using standard dbt selector notation
+    # Can be null if dbt run should not be executed (e.g. only dbt test needed)
+    models:
+      - model1
+      - model2
+      - model3+
+    # List of dbt models to test
+    # Can be null if dbt test should not be executed (e.g. only dbt run needed)
+    test_models:
+      - model1
+    # OPTIONAL: run dbt snapshot command - exclude entire block if not required
+    snapshot_models:
+      # if all is set to true, no models need to be listed
+      all: false
+      # Set all to false to only run these models
+      only:
+        - scd_model1
+        - scd_model2
+    # OPTIONAL: run dbt seed command - exclude entire block if not required
+    seed:
+      # if all is set to true, no models need to be listed
+      all: false
+      # Set all to false to only run these models
+      only:
+        - reference_mapping1
+  # Example of config to only run dbt test
+  - name: ad_hoc_test_only
+    target: dev
+    models: null
+    test_models:
+      - +model1+
+    seed:
+      all: true
+  # Example of config for CI env
+  - name: ci
+    target: ci  # ensure dbt profile sets database as AMPCRE_NONPROD_COPY_TABLEAU
+    models:
+      - model1+
+      - +model2+
+    test_models:
+      - +model3+
+    seed:
+      all: true
+  # Example of cofig to only run the views and nothing else
+  - name: refresh_views
+    target: dev
+    models:
+      - "config.materialized:view"
+    test_models: null
