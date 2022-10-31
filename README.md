@@ -20,6 +20,8 @@ These utils help codify these contexts for easy switching to prevent human error
 
 # Installation
 
+**Currently this repo only prints the run command. The execution of running of dbt is yet to be implemented see: [this issue](https://github.com/itsrobli/dbt-run-configs/issues/2#issue-1430590988)**
+
 ## Overview
 
 This method uses a Python script and accompanying config file. The task context is codified in the config file. You pass the name of the context into the Python script via the command line depending on which context you want to run.  
